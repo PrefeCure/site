@@ -2,28 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loading...</title>
     <style>
         body {
-            margin: 0;
-            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: white;
+            color: #333;
+            font-family: monospace;
             font-size: 24px;
-            background-color: #f0f0f0; /* Optional background color */
+            text-align: center;
+        }
+        #loader {
+            white-space: pre;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div id="loading">Loading...</div>
-
+    <div id="loader">
+    ╱▫️╲
+    ▫️  ▫️
+    ╲▫️╱
+    </div>
     <script>
-        // Redirect after 3 seconds (3000 milliseconds)
-        setTimeout(function() {
-            window.location.href = "https://knowingly-screenshot-167065.framer.app/"; // Replace with your target URL
-        }, 3000);
+        const loader = document.getElementById('loader');
+        const frames = [
+            `╱▫️╲
+▫️  ▫️
+╲▫️╱`,
+            `╲▫️╱
+▫️  ▫️
+╱▫️╲`,
+        ];
+        let currentFrame = 0;
+        
+        // Animation and redirect setup
+        const animationDuration = 3000; // 3 seconds
+        const redirectUrl = 'https://prefecure.framer.website'; // Replace with your desired URL
+
+        // Animate loader
+        const animationInterval = setInterval(() => {
+            loader.textContent = frames[currentFrame];
+            currentFrame = 1 - currentFrame;
+        }, 200);
+
+        // Set timeout for redirect
+        setTimeout(() => {
+            clearInterval(animationInterval);
+            window.location.href = redirectUrl;
+        }, animationDuration);
     </script>
 </body>
 </html>
